@@ -12,16 +12,16 @@ const storageItems: Ref<Item[]> = ref([])
 const initListItems = (): void => {
   if (storageItems.value?.length === 0) {
     const listItems: Item[] = [
-      { title: 'Clean the kitchen', checked: true },
+      { title: 'Clean the kitchen', checked: false },
       { title: 'Do the laundry', checked: false },
       { title: 'Vacuum the living room', checked: false },
-      { title: 'Water the plants', checked: true },
+      { title: 'Water the plants', checked: false },
       { title: 'Organize the closet', checked: false },
-      { title: 'Take out the trash', checked: true },
+      { title: 'Take out the trash', checked: false },
       { title: 'Mow the lawn', checked: false },
       { title: 'Wash the dishes', checked: false },
       { title: 'Prepare meals for the week', checked: false },
-      { title: 'Change bed sheets', checked: true }
+      { title: 'Change bed sheets', checked: false }
     ]
     setToStorage(listItems)
     storageItems.value = listItems
@@ -72,7 +72,9 @@ const getFromStorage = (): Item[] => {
 <template>
   <ul>
     <li :key v-for="(item, key) in storageItems">
-      <ListItem :is-checked="false" @click.prevent="updateItem(item)"> {{ item.title }}</ListItem>
+      <ListItem :is-checked="item.checked" @click.prevent="updateItem(item)">
+        {{ item.title }}
+      </ListItem>
     </li>
   </ul>
 </template>
